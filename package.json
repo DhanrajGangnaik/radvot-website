@@ -1,0 +1,14 @@
+{
+  "name": "radvot-marketing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
+    "test": "playwright test"
+  },
+  "dependencies": {"react": "18.3.1", "react-dom": "18.3.1"},
+  "devDependencies": {"vite": "^6.4.1", "@playwright/test": "^1.56.1", "@axe-core/playwright": "^4.11.0"}
+}

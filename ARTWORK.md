@@ -1,0 +1,17 @@
+# Supporting artwork — visual refresh
+
+Generated with the built-in image generation tool on 2026-11-01. These images are conceptual illustrations, not RADVOT logos, operational screenshots, or evidence of implemented capabilities. They do not replace the still-missing supplied brand asset.
+
+Originals are preserved in `assets/originals/security-core.png` and `assets/originals/infrastructure.png`. Optimized WebP derivatives are in `public/images/`: `security-core.webp` (1440×960, about 126 KB), `security-core-small.webp` (800px wide, about 52 KB), `infrastructure.webp` (1440×960, about 92 KB), and `infrastructure-small.webp` (800px wide, about 35 KB). Conversion used cwebp at quality 82 (desktop) / 80 (mobile). Image proportions are preserved and dimensions are explicit. The supporting hero background is decorative and has empty alt text; the infrastructure illustration has descriptive alt text.
+
+## Final prompt: security core
+
+Use case: stylized-concept. Asset type: wide website supporting illustration for a security intelligence platform, NOT a logo or emblem. Create an exquisitely detailed cinematic 3D macro photograph of an abstract security compute core: a floating transparent optical-glass cube with layered platinum circuitry and a glowing ice-blue energy center, suspended above a dark brushed titanium circular base. Tiny connected glass nodes arranged in a precise circuit constellation in the background. Cool cyan and ice-blue lighting, deep midnight navy (#06101c) backdrop, silver reflections, restrained bloom. Strong sculptural object on the right two-thirds, dark clean negative space on the left for separately-rendered HTML text. Wide landscape 3:2 composition. Premium industrial product photography, physically realistic glass and metal, sophisticated and calm. No robot faces, no shield logos, no branding, no text, no letters, no numbers, no watermark. This is supporting conceptual artwork only, not a replacement brand mark.
+
+## Final prompt: infrastructure
+
+Use case: stylized-concept. Asset type: supporting wide editorial image for an enterprise security website. Premium cinematic 3D visualization of three low-profile graphite infrastructure islands on a midnight-blue surface, each carrying a beautifully machined miniature silver server tower with clear glass side panels, interconnected by elegant thin cyan fiber-optic paths. Isometric three-quarter perspective, balanced scene with generous dark margins. One island contains a floating translucent glass ring around the server, evoking a bounded assessment perimeter. Precise physical materials, platinum edges, frost-blue reflections, realistic studio lighting, no excessive neon. Restrained palette of deep navy #06101c, steel silver, icy cyan #66d9ef. Wide 3:2 landscape. No labels, text, numbers, brand marks, logos, robot faces, shields, people, or watermark. Conceptual supporting illustration, not a screenshot or claim of working cloud integrations.
+
+## Motion and presentation
+
+The palette is midnight navy, ice blue, silver, and cyan, superseding the earlier violet page palette at the user's request. HTML text remains selectable. Hero drift/light sweep and small SVG diagrams use CSS animations, with a page-wide Pause/Resume motion control. `prefers-reduced-motion` disables all animation and smooth scrolling. Capability and trust details expand on demand; no caveats were discarded to shorten the page.
