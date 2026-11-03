@@ -1,0 +1,21 @@
+{
+  "baseline_file_count": 48,
+  "modified_existing_files": [
+    "website/README.md",
+    "website/package-lock.json",
+    "website/package.json",
+    "website/tests/skull.spec.js",
+    "website/src/main.jsx",
+    "website/src/story.css",
+    "website/src/components/Header.jsx",
+    "website/src/components/Hero.jsx"
+  ],
+  "missing_baseline_files": [],
+  "existing_demo_files_unchanged": true,
+  "validation": {
+    "build": "passed; 500 kB lazy chunk warning",
+    "engine": "14 passed",
+    "browser": "63 passed (3.1m)"
+  },
+  "gitnexus": "Impact symbols unresolved; change detection failed because HEAD does not exist."
+}

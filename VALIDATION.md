@@ -1,30 +1,54 @@
-# Local validation — 2026-11-01
+# RADVOT validation — 2026-11-03
 
-## Premium interactive update — 2026-11-02
+## Results
 
-The new production build passes. The 21-test Chrome suite passes with one worker at desktop 1440×1000, tablet 768×1024, and mobile 390×844. Tests cover node hover/focus/click/tap, inspector content, highlighted connections, four assessment stages, automatic completion, pause/replay/reset, offscreen pause, global motion pause, dashboard tabs and arrow/Home/End keys, reduced motion, feature expansion, existing walkthrough/navigation/FAQ behavior, and axe checks. No runtime errors, external requests during demo interactions, or horizontal overflow were observed.
+- Production build: passed, Vite 6.4.5. JavaScript 178.68 KB / 55.96 KB gzip; CSS 41.37 KB / 9.80 KB gzip. Active WOFF2 font files total approximately 47 KB. No added runtime libraries.
+- Browser suite: **24 passed** in 36.8 seconds using installed Google Chrome and one Playwright worker. A final targeted touch-menu test also passed, including axe on the settled open menu and a refreshed screenshot.
+- Main viewports: desktop 1440×1000, tablet 768×1024, touch-mobile 390×844. Additional layout sweep: 1920, 1280, 1024, 768, 640, 375 and 320px wide.
+- No horizontal overflow in tested widths or demo/report states; hero heading remains within its container.
+- Navigation: equal-height desktop controls, no geometry shift on selection, correct header offsets and active state, animated anchor navigation, mobile open/close/Escape, focus return, outside dismissal, inert closed menu, resize transitions and touch controls.
+- Demo: all four stages, direct selection/prerequisite guidance, empty-input validation, enrollment state, explicit approval gate, stage heading focus, report completion, complete reset and post-reset gating.
+- Report: priority/CVSS sorting, all three filters, selected evidence and mitigation, disclosure control, unevaluated PVSS field.
+- Keyboard: skip link, disclosure controls, demo approval and completion, visible focus styling. Axe WCAG 2 A/AA and 2.1 AA checks found zero violations in initial, expanded/planned and completed states across all three projects. Automated results are not a complete accessibility certification.
+- Motion: pointer light, button hover, global pause/resume, offscreen pause, reduced-motion static presentation and unchanged demo functionality.
+- Runtime: no page errors, broken static resources or unexpected external requests during monitored loading/preview interaction. Fonts resolve locally. No hero raster/unused TTF requests.
+- Local performance sample: CLS **0.0000** in all three projects. Median requestAnimationFrame interval **16.7 ms**; p95 **16.7–16.8 ms**. These brief Chrome scheduling measurements do not certify performance on every device.
+- HTTP check: http://127.0.0.1:5173/ returned 200. The existing local preview remains available.
+- `git diff --check`: passed.
 
-Loading/layout samples recorded CLS 0 at all three sizes; sampled median animation-frame intervals were ~16.7 ms. These are local Chromium observations, not device-wide performance guarantees. The interactive module is fetched once as a separate lazy chunk, about 4.24 KB gzip; main JavaScript is about 56.46 KB gzip. No animation/graph/3D dependencies were added.
+## Screenshots
 
-Updated screenshots: `test-results/desktop-premium-full.png`, `tablet-premium-full.png`, `mobile-premium-full.png`, plus corresponding `*-intelligence.png` and `*-premium-hero.png` captures. The screenshot process waits for lazy images and removes fixed overlays from section-only captures. Desktop and mobile captures were visually reviewed.
+Generated artifacts are ignored by Git, under `test-results/`. Desktop, tablet and mobile hero, full-page, completed-demo and report captures were produced. Desktop/mobile reports, hero compositions and overall section layout were visually inspected. Section-only screenshots hide the sticky header and skip link for a clean capture; the site itself is unchanged by that capture option.
 
-The supplied logo is still unavailable, so an entrance for that specific asset remains blocked. Existing plain-text branding has a restrained entrance. GitNexus impact is LOW for modified components; the change detector was invoked but cannot diff without a HEAD commit. No operational code was changed or deployed. See PREMIUM-MOTION.md for implementation details.
+Delivery copies:
+- `test-results/delivery/desktop-hero.png`
+- `test-results/delivery/mobile-hero.png`
+- `test-results/delivery/desktop-full.png`
+- `test-results/delivery/mobile-full.png`
+- `test-results/delivery/desktop-demo.png`
+- `test-results/delivery/mobile-report.png`
+- `test-results/delivery/mobile-menu.png`
 
-## Earlier visual refresh
+## Code scope
 
-- `npm run build`: passed after the visual refresh with Vite 6.4.5. Output: HTML 1.36 kB, CSS 37.56 kB, JavaScript 169.56 kB; compressed CSS 8.80 kB and JS 54.08 kB.
-- `npm test -- --workers=2`: 12/12 Playwright tests passed in installed Google Chrome in 21.2 seconds. Desktop 1440×1000, tablet 768×1024, mobile 390×844; extra overflow check at 320px.
-- All six stage buttons, sequential Next, terminal disabled state, Restart, and all evidence disclosures exercised.
-- Navigation anchors, mobile open/close/Escape, capability filters, and keyboard FAQ open/close exercised.
-- No browser runtime errors or external requests during walkthrough testing.
-- Zero axe violations for WCAG 2 A/AA and 2.1 AA tags across all six stages at all three sizes, plus open mobile navigation. This automated result is not a complete accessibility certification.
-- Reduced-motion scroll behavior, disabled animations, Pause/Resume motion, and favicon response verified. Two responsive images load with explicit dimensions. Expandable capabilities and trust controls tested with keyboard input and axe while open. Entrance opacity fades were removed to keep text contrast stable during motion.
-- Desktop, tablet, and mobile hero and full-page screenshots inspected in `test-results/`. These are ignored generated QA artifacts. No horizontal overflow in tested states.
-- Only the isolated `website/` directory was created. Operational source was read for claims; no backend tests, security tools, credentials, or target connections were used.
-- GitNexus CLI upstream impact was run before changing App and Walkthrough: LOW risk, zero indexed upstream callers/processes. JSX edges were reviewed manually. The detect_changes backend was called but could not compute a diff because the enclosing repository has no HEAD commit. Changed files were inspected; nothing was committed or deployed.
+GitNexus upstream impact was run for changed/removed existing components and hooks before editing. Reported risk was LOW; no HIGH/CRITICAL warnings. JSX imports/rendering were also inspected because the graph does not capture every component edge. The old page, graph, duplicate demo and motion modules have been replaced by four isolated marketing components.
 
-The production preview is served by `npm run preview` on http://127.0.0.1:5173 while the retained process remains running. Restart commands are in README.md.
+`detect_changes(scope: all)` succeeded and reported LOW risk, with no affected indexed processes. New/untracked components and removed files were additionally reviewed with Git status and direct source inspection; the detector's tracked diff is not exhaustive coverage of untracked files. All changes are within this marketing website. No backend, credentials, operational agent state, installation behavior or model artifacts were changed. No deployment, commit or push was performed.
 
-## Outstanding
+## Remaining limits
 
-The actual RADVOT logo was unavailable. Its local path has been requested. Logo inspection, original preservation, optimized logo derivatives and logo-specific social metadata remain blocked on that file. The footer identifies this missing asset. A simple R favicon is used as permitted. The newly generated supporting illustrations are explicitly conceptual, stored with originals and optimized derivatives, and do not substitute for the logo. See ARTWORK.md.
+- PVSS methodology/scale is not established. The preview correctly displays “Not evaluated”; numeric CVSS and priority examples are explicitly synthetic.
+- Supplied logo artwork is unavailable. Plain text navigation and the simple R favicon remain honest fallbacks; the effect-driven hero does not depend on a logo image.
+- Safari, Firefox and physical-device testing were not performed. Touch behavior was tested using Chrome mobile emulation.
+- No operational product behavior was executed or certified. Capability classification is based on source inspection documented in CONTENT-EVIDENCE.md.
+
+## Reproduce
+
+```sh
+cd /Users/dhanrajgangnaik/Github/radvot/website
+npm run build
+npm test -- --workers=1
+npm run preview
+```
+
+Do not start a second server if port 5173 already hosts the preview. `npm run dev` is the alternative development command on the same port.

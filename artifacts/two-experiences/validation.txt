@@ -1,0 +1,70 @@
+RADVOT TWO-EXPERIENCE CLEANUP — 2026-11-04
+
+Routes
+/ opens The Third Force immediately.
+/demo opens the existing assessment simulation.
+Legacy non-demo URLs normalize to / without another history entry.
+Cloud/On-Premises handoff preserves an existing demo session.
+Demo branding and return navigation lead to /.
+Email, LinkedIn and Launch interactive demo remain in the cinematic footer.
+
+Modified files
+src/main.jsx
+src/styles.css
+src/features/cinematic-story/CinematicStory.jsx
+src/features/interactive-demo/DemoApp.jsx
+index.html
+tests/story.spec.js
+tests/motion.spec.js
+tests/workspace.spec.js
+scripts-motion-probe.mjs
+README.md
+ARTWORK.md
+
+Removed legacy-only files
+src/story.css
+src/content.js
+src/components/Header.jsx
+src/components/ReportPreview.jsx
+src/components/SkullGlitch.jsx
+src/components/ProductDemo.css
+src/components/SkullGlitch.css
+src/components/ProductDemo.jsx
+src/components/Hero.jsx
+tests/experience.spec.js
+tests/mission.spec.js
+tests/skull.spec.js
+tests/interaction.spec.js
+public/fonts/orbitron-variable.ttf
+public/fonts/Orbitron-OFL.txt
+public/fonts/manrope-variable.ttf
+
+Preservation
+Recovery snapshot: /private/tmp/radvot-two-experiences-before/
+Scene renderer, motion/story models, cinematic CSS, demo entry adapter,
+demo engine, data, planning adapter and colorful demo CSS are byte-identical
+to the pre-edit snapshot. Original source artwork and unrelated changes retained.
+DemoApp changes are only the two return-navigation labels.
+CinematicStory change removes redundant text-fallback homepage link.
+
+Validation
+npm run build: PASS (632 modules). Existing large Three.js chunk warning remains.
+npm run test:engine: 18 passed, 0 failed.
+npm test: 36 passed (2.1 minutes), desktop/tablet/mobile.
+git diff --check: PASS.
+Browser coverage: sequences, reverse scroll, acronym activation, fallback,
+reduced motion, route refresh, Back/Forward, mode handoff, assessment workflows,
+agent creation, mitigation/retest, export and accessibility.
+Dev (5173) and production preview (4173) checked at 1440px and 390px:
+cinematic -> /demo works, no cinematic header remains on demo, no horizontal overflow.
+Visually inspected representative desktop/mobile cinematic scenes and settled demo.
+Screenshots in this directory include opening, portal/core, evidence, brand reveal,
+final handoff, and settled desktop/mobile demo.
+
+Limitations
+GitNexus does not resolve nested website symbols; impact queries returned unknown.
+GitNexus detect_changes failed because its enclosing indexed repository has no HEAD.
+Manual import/dependency inspection and snapshot comparisons were used instead.
+Production hosting must supply index.html fallback for direct /demo requests;
+no hosting configuration was changed or deployed.
+No commit, push, deployment or operational-backend modification.

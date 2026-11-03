@@ -4,11 +4,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "dev": "vite --host 0.0.0.0 --port 5173 --strictPort",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:engine": "node --test unit-tests/*.test.js"
   },
-  "dependencies": {"react": "18.3.1", "react-dom": "18.3.1"},
-  "devDependencies": {"vite": "^6.4.1", "@playwright/test": "^1.56.1", "@axe-core/playwright": "^4.11.0"}
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "gsap": "^3.13.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.56.1",
+    "vite": "^6.4.1"
+  }
 }

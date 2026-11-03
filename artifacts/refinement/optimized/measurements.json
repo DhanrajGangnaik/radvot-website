@@ -1,0 +1,30 @@
+[
+  {
+    "device": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "finalRenderedProgress": 4.0101,
+    "samples": 403,
+    "medianMs": 16.699999999999818,
+    "p95Ms": 16.700000000000728,
+    "over33ms": 0,
+    "meanDrawCallsPerActiveRaf": 93.10569105691057,
+    "longTasks": []
+  },
+  {
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "finalRenderedProgress": 4.0188,
+    "samples": 402,
+    "medianMs": 16.699999999999818,
+    "p95Ms": 16.799999999999955,
+    "over33ms": 0,
+    "meanDrawCallsPerActiveRaf": 93.40489130434783,
+    "longTasks": []
+  }
+]

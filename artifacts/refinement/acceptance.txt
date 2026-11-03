@@ -1,0 +1,180 @@
+RADVOT cinematic motion refinement — local acceptance report
+2026-11-04
+
+The existing procedural world, purple portal, Intelligence Core, dialogue,
+eight sequences, geometric RADVOT reveal, and interactive demo were preserved.
+No dependencies were added. No backend files were modified. No commit, push,
+or deployment was performed.
+
+Observed causes and corrections
+
+Continuous scroll progress previously drove React updates and chapter-dependent
+canvas layout changes. Native smooth scrolling could also compete with the
+scroll-linked animation. Repeated particle meshes increased draw submissions;
+hard visibility gates and unsmoothed presentation changes created rough edges.
+
+One GSAP scrub (0.28 seconds) now owns temporal smoothing. Its tween update drives
+the scene ref and CSS variables; React receives only chapter, component activation,
+and authorization changes. Native scrolling remains intact. Navigation seeks the
+same timeline, with no second damping controller. Native CSS smooth scrolling is
+disabled only inside the cinematic route.
+
+The canvas keeps stable bounds through the narrative. Camera position, look-at,
+zoom, and optical view offset follow continuous authored envelopes. Reframing no
+longer resizes the drawing buffer at chapter boundaries. No camera shake or extra
+spinning was introduced.
+
+Portal formation and departure retain the original shader and layered rings.
+Continuous scale, opacity, and energy envelopes connect formation, materialization,
+and dissolution. The core gains restrained floating and light pulsation; ambient
+motion slows into silence. Network, connection, beacon, selection, and seed
+visibility use continuous envelopes. Traveling pulses shrink at their loop edges.
+The six orbital components illuminate progressively, retain deterministic
+activation thresholds, and transform into the existing voxel wordmark. Labels
+move continuously into the final composition. Copy fades around chapter swaps
+with a long readable hold and only one active narrative block.
+
+Performance changes
+
+The full profile's 90 fragments and 28 signals are now two instanced batches
+instead of 118 individually rendered meshes. Compact uses 36 + 14 instances.
+Geometries/materials are shared, transforms reuse scratch objects, and orbital
+origins are precomputed. Static line colors are uploaded once; connection positions
+change only with timeline progress. Camera projection updates are similarly gated.
+Frame deltas are capped for ambient motion after stalls. Demand rendering stops
+when paused, hidden, offscreen, or fully silent.
+
+Profiles cover full, balanced, compact, and economy devices. They vary city detail,
+particle counts, ring segments, antialiasing, and maximum DPR while retaining all
+essential scenes. Sustained slow frames may reduce DPR in two bounded steps.
+Geometries, materials, and instance buffers are disposed on unmount. Browser tests
+verify stable buffer creation over replay and zero remaining tracked buffers after
+switching to the text edition three times. This is buffer lifecycle evidence, not
+a complete GPU memory profiler.
+
+Demo and terminology
+
+Visible content, controls, accessible labels, and page titles use “experience”
+or “The Third Force.” Internal identifiers, /story, and handoff parameters remain
+compatible. The only change inside DemoApp is the requested empty-state wording;
+reversing that string restores its exact pre-edit SHA-256 hash. Engine, data,
+planning adapter, styles, and dependencies remain unchanged.
+
+Demo choices preload the existing workspace on focus/pointer intent. Supported
+browsers use a short native same-origin view transition; other browsers retain
+normal navigation with a dark loading surface. Reduced motion disables that
+transition. Cloud/On-Premises handoff and existing session preservation are tested.
+This remains a page navigation, not one shared WebGL scene across both routes.
+
+Files modified (relative to website/)
+
+src/main.jsx
+src/components/Header.jsx
+src/components/Hero.jsx
+src/components/ProductDemo.jsx
+src/features/cinematic-story/CinematicStory.jsx
+src/features/cinematic-story/StoryWorld.jsx
+src/features/cinematic-story/StoryDemoEntry.jsx
+src/features/cinematic-story/storyModel.js
+src/features/cinematic-story/cinematic.css
+src/features/interactive-demo/DemoApp.jsx — wording only
+tests/story.spec.js
+tests/experience.spec.js — use configured request origin
+playwright.config.js — isolated production preview on 4173, two workers
+
+Files created
+
+src/features/cinematic-story/motionModel.js
+src/experience-transitions.css
+unit-tests/motion.test.js
+tests/motion.spec.js
+scripts-motion-probe.mjs
+artifacts/refinement/ — measurements, screenshots, preservation check, this report
+
+Validation
+
+Production build: passed, 642 modules, 1.97 seconds.
+Engine tests: 18 passed, 0 failed.
+Browser suite: 72 passed, 0 failed, 2.6 minutes. Full output: browser-tests.txt.
+Desktop: 1440 x 1000; tablet: 768 x 1024; mobile: 390 x 844.
+Additional layout checks: 320 x 720 and 844 x 390.
+
+Isolated 6.75-second forward/reverse motion sweep per viewport:
+Desktop: 403 samples; median 16.7 ms; p95 16.7 ms; 0 intervals >33.4 ms;
+         mean 93.11 draw submissions per active RAF; no observed long tasks.
+Mobile emulation: 402 samples; median 16.7 ms; p95 16.8 ms;
+         0 intervals >33.4 ms; mean 93.40 draw submissions per active RAF;
+         no observed long tasks.
+Raw measurements: optimized/measurements.json.
+The sweep finishes while the scrub is still settling; finalRenderedProgress
+records that sampled state, not an assertion that the final target has settled.
+Separate browser assertions verify settlement after rapid/reversed input.
+
+Visual inspection covers opening Red/Blue infrastructure, fragmentation, silence,
+partial portal formation, emerged core, authorization, connected evidence,
+remediation/retest, departure, partial geometric assembly, wordmark, and demo
+choices. Portrait and compact landscape retain the essential graphics; long
+dialogue/control content uses the existing scrollable copy area. Tests exercise
+slow, normal, fast, reversed, and rapidly alternating scroll inputs, keyboard
+navigation, skip/replay, pause, all retest outcomes, accessible fallback, and demo
+workflows. Narrow-width overflow and reduced-motion checks are included.
+
+An initial pair of pause screenshot failures was traced to Playwright scrolling
+an oversized mobile element into view. Capturing the visible viewport clip avoids
+changing the timeline; the separate no-draw-while-paused assertion remains intact.
+
+Visual evidence (relative to this report)
+
+baseline/desktop/3.85.png — pre-refinement portal reference
+optimized/desktop/1.5.png — fragmented Red/Blue network
+optimized/desktop/3.3.png — intermediate portal formation
+optimized/desktop/3.85.png — portal and materialized Core
+optimized/desktop/4.4.png — authorization in progress
+optimized/desktop/5.75.png — shared evidence graph
+optimized/desktop/7.95.png — departure through portal
+optimized/desktop/8.45.png — intermediate geometric assembly
+optimized/desktop/8.95.png — final wordmark
+optimized/desktop/9.75.png — demo handoff
+optimized/mobile/ — matching mobile captures at all nine positions
+verified/ — final browser screenshots including opening, silence, retest outcomes,
+            narrow portrait, compact landscape, homepage, and demo workflows
+prior-run/ — earlier run artifacts, including the superseded screenshot failures
+
+Final desktop portal/evidence and mobile wordmark/handoff captures were visually
+inspected after the isolated probe. The reference portal was compared with the
+refined rendering. Screenshot checks complement the continuous browser assertions;
+they do not constitute a subjective rating of every frame on every device.
+
+Measurement limits
+
+The initial baseline probe inadvertently used native smooth scrolling on every
+animation frame, repeatedly restarting its scroll target. Its settled screenshots
+are useful visual references, but its sweep timings are not a valid before/after
+performance baseline. No FPS or percentage speedup is claimed. Final measurements
+use explicit instant native scroll across a varied forward/reverse path, with
+GSAP providing the sole visual smoothing, and run separately from browser tests.
+
+Tests use installed Chrome on this Mac with desktop/tablet/mobile emulation, not
+physical mobile hardware or Safari/Firefox. RAF timings measure scheduling
+consistency, not GPU execution time. Thermal throttling and longer sessions may
+behave differently. The lazy Three.js scene bundle still triggers Vite's >500 kB
+warning (840.25 kB minified, 226.92 kB gzip).
+
+GitNexus impact calls could not resolve the website symbols in the enclosing
+Github index: risk UNKNOWN. References were inspected manually. Its final change
+detection also failed because the enclosing repository has no HEAD. This is not
+a clean graph-based impact certification. The 32-file pre-edit hash comparison is
+retained in preservation-check.json; unrelated files were preserved.
+
+Local commands
+
+npm run dev
+npm run build
+npm run test:engine
+npm test
+npm run preview -- --port 4173
+node scripts-motion-probe.mjs optimized
+
+The browser suite expects a production build. PLAYWRIGHT_PORT and
+RADVOT_PREVIEW_URL override the isolated test/probe URLs. Existing development
+server on 5173 was left running.

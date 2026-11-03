@@ -1,39 +1,47 @@
-# RADVOT marketing website
+# RADVOT — The Third Force
 
-Current implementation and validation notes: [EXPERIENCE.md](EXPERIENCE.md). The current page uses a CSS/SVG workflow hero, Orbitron/Manrope typography, a four-step agent-to-report preview, and the official mailto contact. Older visual notes below describe prior iterations.
+A React 18 + Vite 6 website with two primary experiences:
 
-Local-only React 18 + Vite 6 site. Operational PurpleClaw code is not imported or modified. There is no backend integration or tracking. Runtime dependencies are React and React DOM; styling uses local CSS and system fonts.
+- `/`: The Third Force, the existing procedural 3D cinematic experience. Native scrolling drives all eight chapters, the RADVOT reveal and the environment handoff.
+- `/demo`: the interactive security assessment simulation. Agent identity, deployment, approval, findings, mitigation, retest and exports remain browser-local.
 
-```bash
-cd /Users/dhanrajgangnaik/Github/radvot/website
+The old marketing homepage, embedded mission, experimental skull route and supporting marketing sections have been retired. Old `/story` bookmarks normalize to `/` using history replacement, without adding an extra Back step. Other non-demo paths also normalize to the cinematic homepage. The demo accepts a trailing slash.
+
+## Local development
+
+```sh
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:5173 (also accessible at http://localhost:5173 on this computer).
+Open **http://localhost:5173/**. Development binds to `0.0.0.0:5173` and Vite prints the LAN URL for trusted local testing. Preview stays loopback-only.
 
-Production build and preview:
-
-```bash
+```sh
 npm run build
 npm run preview
-```
-
-Both development and preview use port 5173 with strict port selection; stop one before starting the other. Built files are in `dist/`.
-
-Browser validation (requires installed Google Chrome):
-
-```bash
-npm run build
+npm run test:engine
 npm test
 ```
 
-Playwright starts a preview server automatically if port 5173 is not already serving. It exercises desktop/tablet/mobile navigation, six stages, evidence details, restart/next, capability filters, keyboard FAQs, local-only requests, reduced motion, horizontal overflow, and axe accessibility scans. Screenshots go to `test-results/`.
+Development and preview default to port 5173; run one at a time. Playwright uses installed Google Chrome and production preview on port 4173. Tests cover desktop, tablet and mobile, complete cinematic scrolling in both directions, route history/refresh, accessible fallbacks, environment handoff and full demo workflows.
 
-Content and claim sources: [CONTENT-EVIDENCE.md](CONTENT-EVIDENCE.md). Walkthrough data: `src/content.js`. Layout and interactions: `src/main.jsx`. Responsive styling: `src/styles.css`.
+## Structure
 
-The visual refresh uses midnight navy and ice blue, optimized supporting illustrations, CSS motion with a pause control, and collapsible capability/trust details. [ARTWORK.md](ARTWORK.md) records exact generation prompts and asset paths. New styles are in `src/visual-refresh.css`; animated diagrams are in `src/visuals.jsx`.
+- `src/main.jsx`: lazy routing to the cinematic homepage or demo handoff adapter.
+- `src/styles.css`: shared fonts, typography, native controls and accessibility.
+- `src/experience-transitions.css`: native page transition enhancement and loading screens.
+- `src/features/cinematic-story/`: the existing scene, camera, timeline, narrative and mode handoff.
+- `src/features/interactive-demo/`: the existing colorful workspace, reducer, intent engine, curated findings and simulation adapter.
+- `public/fonts/`: self-hosted Manrope and Space Grotesk WOFF2 fonts with licenses.
 
-**2026-11-02 update:** the page now uses the requested violet/pink/crimson palette and includes a functional attack-path graph, four-stage assessment sequence, five-category dashboard, hero lighting, pointer/scroll effects, and expanded motion controls. See [PREMIUM-MOTION.md](PREMIUM-MOTION.md) for behavior, performance and validation details. Run the full browser suite with `npm test -- --workers=1`.
+Reduced-motion preferences and unavailable WebGL automatically show the complete text edition. The cinematic final screen retains Cloud and On-Premises choices, the launch button, Email and LinkedIn. Mode handoff initializes only a new demo session; it never overwrites existing agents or assessments. The demo's RADVOT / The Third Force links return to `/`.
 
-**Incomplete brand integration:** the supplied logo was not attached or found in the workspace. Its local path has been requested. The site states this in the footer; the new conceptual illustrations are not replacement logos. The plain R favicon is a documented fallback. Original logo preservation, optimization and logo-specific metadata require the real asset and remain outstanding. No production URL or domain has been invented.
+## Production routing
+
+The build output is `dist/`. A static host must serve `index.html` for direct visits to `/demo` (and legacy `/story`) as a standard SPA fallback. Vite development and preview already support this, including refresh. No hosting configuration or deployment has been changed.
+
+## Execution boundary
+
+The operational security platform is independent. This site has no model keys, authentication, enrollment, scanning or exploitation integration. All assessments are explicitly labeled simulations. See [INTERACTIVE-DEMO.md](INTERACTIVE-DEMO.md) for the retained state architecture and future authenticated integration requirements.
+
+Previous implementation records in the other Markdown documents are historical; this README describes the current routing and active source tree. Supplied `logo.jpg` and original concept artwork are retained as source references, not shipped as unused runtime assets.

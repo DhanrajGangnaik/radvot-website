@@ -1,0 +1,19 @@
+{
+  "modified_from_32_file_baseline": [
+    "src/main.jsx",
+    "src/components/Header.jsx",
+    "src/components/ProductDemo.jsx",
+    "src/components/Hero.jsx",
+    "src/features/cinematic-story/CinematicStory.jsx",
+    "src/features/cinematic-story/StoryDemoEntry.jsx",
+    "src/features/cinematic-story/storyModel.js",
+    "src/features/cinematic-story/cinematic.css",
+    "src/features/cinematic-story/StoryWorld.jsx",
+    "src/features/interactive-demo/DemoApp.jsx",
+    "tests/experience.spec.js",
+    "tests/story.spec.js"
+  ],
+  "additional_modified_config": "playwright.config.js",
+  "demo_logic_preserved_except_requested_empty_state_copy": true,
+  "packages_unchanged": true
+}

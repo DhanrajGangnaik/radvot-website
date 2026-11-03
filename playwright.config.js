@@ -1,11 +1,15 @@
 import { defineConfig } from '@playwright/test';
 
+const port=process.env.PLAYWRIGHT_PORT || '4173';
+const baseURL=`http://127.0.0.1:${port}`;
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
+  workers: 2,
   reporter: 'list',
-  use: { baseURL: 'http://127.0.0.1:5173', channel: 'chrome', headless: true },
-  webServer: { command: 'npm run preview', url: 'http://127.0.0.1:5173', reuseExistingServer: !process.env.CI },
+  use: { baseURL, channel: 'chrome', headless: true },
+  webServer: { command: `npm run preview -- --port ${port}`, url: baseURL, reuseExistingServer: !process.env.CI },
   projects: [
     { name: 'desktop', use: { viewport: { width: 1440, height: 1000 } } },
     { name: 'tablet', use: { viewport: { width: 768, height: 1024 } } },

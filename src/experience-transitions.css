@@ -1,0 +1,18 @@
+/* Progressive enhancement: native same-origin navigation, with no scroll interception. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
+.experience-loading {
+  margin: 0;
+  min-height: 100svh;
+  padding: 120px 6%;
+  background: #070610;
+  color: #e5d7f4;
+  font-size: 14px;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
